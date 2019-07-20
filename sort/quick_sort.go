@@ -4,34 +4,34 @@ import (
 	"math/rand"
 )
 
-func quickSort(a []int, lo, hi int) {
+func quickSort(arr []int, lo, hi int) {
 	if hi <= lo+15 {
-		selectSort(a, lo, hi+1)
+		selectSort(arr, lo, hi+1)
 		return
 	}
 
-	swap(a, lo, rand.Intn(hi-lo) + lo)
-	v := a[lo]
+	swap(arr, lo, rand.Intn(hi-lo)+lo)
+	v := arr[lo]
 
 	i := lo
 	j := hi
 
 	for {
-		for i <= j && a[i] <= v {
+		for i <= j && arr[i] <= v {
 			i++
 		}
-		for i <= j && a[j] >= v {
+		for i <= j && arr[j] > v {
 			j--
 		}
 		if i > j {
 			break
 		}
-		swap(a, i, j)
+		swap(arr, i, j)
 	}
 
-	swap(a, lo, i-1)
-	quickSort(a, lo, i-2)
-	quickSort(a, i, hi)
+	swap(arr, lo, j)
+	quickSort(arr, lo, j-1)
+	quickSort(arr, j+1, hi)
 }
 
 func quick3Way(a []int, lo, hi int) {
@@ -44,7 +44,7 @@ func quick3Way(a []int, lo, hi int) {
 	i := lo + 1
 	gt := hi
 
-	swap(a, lo, rand.Intn(hi-lo) + lo)
+	swap(a, lo, rand.Intn(hi-lo)+lo)
 	v := a[lo]
 
 	for i <= gt {
